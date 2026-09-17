@@ -13,7 +13,12 @@ public class ListeSimple {
         size++;
     }
 
-
+    /**
+     * Modifies the first object in the List that matches with given value
+     *
+     * @param element        value to match
+     * @param nouvelleValeur new value to replace with
+     */
     public void modifiePremier(Object element, Object nouvelleValeur) {
         Noeud courant = tete;
         while (courant != null && courant.getElement() != element)
@@ -22,6 +27,12 @@ public class ListeSimple {
             courant.setElement(nouvelleValeur);
     }
 
+    /**
+     * Modifies all the objects in the List that matches with given value
+     *
+     * @param element        value to match
+     * @param nouvelleValeur new value to replace with
+     */
     public void modifieTous(Object element, Object nouvelleValeur) {
         Noeud courant = tete;
         while (courant != null) {
@@ -44,6 +55,11 @@ public class ListeSimple {
         return sb.toString();
     }
 
+    /**
+     * Removes the first object in the List that matches with given value
+     *
+     * @param element value to match
+     */
     public void supprimePremier(Object element) {
         if (tete != null) {
             if (tete.getElement() == element) {
@@ -64,10 +80,22 @@ public class ListeSimple {
         }
     }
 
+    /**
+     * Removes all the objects in the List that matches with given value
+     *
+     * @param element value to match
+     */
     public void supprimeTous(int element) {
         tete = supprimeTousRecurs(element, tete);
     }
 
+    /**
+     * Recursive method to remove all the objects in the List that matches with given value
+     *
+     * @param element value to match
+     * @param tete    head node of the list
+     * @return the new head of the list
+     */
     public Noeud supprimeTousRecurs(Object element, Noeud tete) {
         if (tete != null) {
             Noeud suiteListe = supprimeTousRecurs(element, tete.getSuivant());
