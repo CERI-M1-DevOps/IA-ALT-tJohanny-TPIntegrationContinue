@@ -2,11 +2,22 @@ name: Generate and deploy Java doc
 on:
   pull_request:
     types: [ closed ]
+permissions:
+  contents: write
 jobs:
   if_merged:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
+
+      - name: Checkout running repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: corretto
+          java-version: '21'
 
       - name: Echo PR merged
         run: |
@@ -19,4 +30,4 @@ jobs:
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./public
+          publish_dir: ./target/reports/apidocs
