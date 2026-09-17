@@ -1,0 +1,22 @@
+name: Generate and deploy Java doc
+on:
+  pull_request:
+    types: [ closed ]
+jobs:
+  if_merged:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Echo PR merged
+        run: |
+          echo The PR was merged
+
+      - name: Generate Java doc
+        run: mvn -B javadoc::javadoc
+
+      - name: Deploy Java doc
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
